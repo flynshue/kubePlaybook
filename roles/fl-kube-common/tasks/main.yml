@@ -1,2 +1,3 @@
 ---
 # tasks file for fl-kube-common
+- import_tasks: docker.yml
