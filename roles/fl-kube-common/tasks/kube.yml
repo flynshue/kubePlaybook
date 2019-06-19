@@ -10,10 +10,10 @@
     filename: kubernetes.list
     state: present
 
-- name: Install kubeadm
+- name: Install kubeadm, kubelet, kubectl
   apt:
-    name: "{{item}}=1.12.2-00"
-    state: present
+    name: "{{item}}"
+    state: latest
     update_cache: yes
   loop:
    - kubelet
