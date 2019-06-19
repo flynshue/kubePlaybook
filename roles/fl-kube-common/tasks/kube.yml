@@ -1,0 +1,21 @@
+---
+- name: Add kubernetes repo gpg key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add kubernetes repo
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    filename: kubernetes.list
+    state: present
+
+- name: Install kubeadm
+  apt:
+    name: "{{item}}=1.12.2-00"
+    state: present
+    update_cache: yes
+  loop:
+   - kubelet
+   - kubeadm
+   - kubectl
