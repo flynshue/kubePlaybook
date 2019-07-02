@@ -1,2 +1,7 @@
 ---
 # handlers file for fl-kube-common
+- name: restart kubelet
+  service:
+    name: kubelet
+    state: restarted
+  listen: "roll kubelet"
