@@ -1,4 +1,4 @@
 ---
 # tasks file for fl-kube-master
-- name: Set pod network
-  command: "kubeadm init --pod-network-cidr={{ pod_network_cidr }}"
+- import_tasks: pod-network.yml
+- import_tasks: kube-config.yml
