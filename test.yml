@@ -4,7 +4,7 @@
   become_method: sudo
   gather_facts: yes
   roles:
-    - { role: fl-kube-common }
+    - { role: kube-common }
 
 - hosts: kube-master
   become: yes
