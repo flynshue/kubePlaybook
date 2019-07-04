@@ -4,6 +4,7 @@
     group: "{{ kube_user }}"
     owner: "{{ kube_user }}"
     path: "/home/{{ kube_user }}/.kube"
+    state: directory
 
 - name: copy kube config file
   copy:
