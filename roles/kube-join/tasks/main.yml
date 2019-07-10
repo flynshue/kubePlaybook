@@ -6,5 +6,11 @@
   delegate_to: "{{groups['kube-master'][0]}}"
 
 - name: Join node to cluster
-  command: "{{ kubeadm_join['stdout'] }}"
+  block:
+    - stat: 
+        path: /etc/kubernetes/bootstrap-kubelet.conf
+      register: kubelet_conf
+
+    - command: "{{ kubeadm_join['stdout'] }}"
+      when: kubelet_conf.stat.exists == False
   when: inventory_hostname in groups['kube-nodes']
