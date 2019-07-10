@@ -7,11 +7,10 @@
     - { role: kube-common }
 
 - hosts: kube-master
-  become: yes
-  become_method: sudo
-  gather_facts: yes
+  gather_facts: no
   roles:
-    - { role: fl-kube-master, kube_user: flynshue }
+    - { role: fl-kube-master, kube_user: flynshue, become: yes, become_method: sudo }
+    - { role: flannel }
 
 
   
