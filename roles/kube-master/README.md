@@ -12,7 +12,7 @@ Role Variables
 --------------
 
   ```
-  kube_user: 
+  kube_user: userName
   pod_network_cidr: "10.244.0.0/16"
   ```
 
