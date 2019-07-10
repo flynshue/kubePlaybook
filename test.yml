@@ -10,7 +10,7 @@
   gather_facts: no
   roles:
     - { role: fl-kube-master, kube_user: "{{ lookup('env', 'USER') }}", become: yes, become_method: sudo }
-    - { role: flannel }
+
   tasks:
     - name: lookup lines test
       debug: msg="{{ item }} kubeadm token print test"
