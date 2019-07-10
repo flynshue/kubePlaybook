@@ -11,7 +11,7 @@
   become: yes 
   become_method: sudo 
   roles:
-    - { role: fl-kube-master, kube_user: "{{ lookup('env', 'USER') }}" }
+    - { role: kube-master, kube_user: "{{ lookup('env', 'USER') }}" }
 
 - hosts: all
   gather_facts: yes
