@@ -11,8 +11,10 @@ Requires kubeadm, kubectl, and kubeadm to be installed. Use kube-common role to 
 Role Variables
 --------------
 
+  ```
   kube_user: 
   pod_network_cidr: "10.244.0.0/16"
+  ```
 
 Example Playbook
 ----------------
