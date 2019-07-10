@@ -6,7 +6,7 @@
   roles:
     - { role: kube-common }
 
-- hosts: kube-master
+- hosts: kube_master
   gather_facts: no
   become: yes 
   become_method: sudo 

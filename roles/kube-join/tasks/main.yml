@@ -3,7 +3,7 @@
 - name: print join command
   command: kubeadm token create --print-join-command
   register: kubeadm_join
-  delegate_to: "{{groups['kube-master'][0]}}"
+  delegate_to: "{{groups['kube_master'][0]}}"
 
 - name: Join node to cluster
   block:
@@ -13,4 +13,4 @@
 
     - command: "{{ kubeadm_join['stdout'] }}"
       when: kubelet_conf.stat.exists == False
-  when: inventory_hostname in groups['kube-nodes']
+  when: inventory_hostname in groups['kube_nodes']
