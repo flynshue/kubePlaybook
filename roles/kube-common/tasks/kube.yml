@@ -1,0 +1,29 @@
+---
+- name: Add kubernetes repo gpg key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add kubernetes repo
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    filename: kubernetes.list
+    state: present
+
+- name: Install kubeadm, kubelet, kubectl
+  apt:
+    name: "{{item}}"
+    state: latest
+    update_cache: yes
+  loop:
+   - kubelet
+   - kubeadm
+   - kubectl
+
+- name: Configure node ip
+  lineinfile:
+    path: /etc/default/kubelet
+    create: yes
+    state: present
+    line: "KUBELET_EXTRA_ARGS=--node-ip={{ansible_default_ipv4.address}}"
+  notify: "roll kubelet"

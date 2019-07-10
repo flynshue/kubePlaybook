@@ -1,0 +1,5 @@
+---
+# tasks file for fl-kube-master
+- import_tasks: pod-network.yml
+- import_tasks: kube-config.yml
+- import_tasks: flannel.yml

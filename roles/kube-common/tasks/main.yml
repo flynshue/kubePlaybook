@@ -1,0 +1,11 @@
+---
+# tasks file for fl-kube-common
+- import_tasks: docker.yml
+- import_tasks: kube.yml
+
+- name: configure net bridge for flannel
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    reload: yes
+    state: present
+    value: 1

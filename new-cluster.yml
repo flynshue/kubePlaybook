@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  roles:
+    - { role: kube-common }
+
+- hosts: kube-master
+  gather_facts: no
+  become: yes 
+  become_method: sudo 
+  roles:
+    - { role: kube-master, kube_user: "{{ lookup('env', 'USER') }}" }
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+  become_method: sudo
+  roles:
+    - { role: kube-join }
+

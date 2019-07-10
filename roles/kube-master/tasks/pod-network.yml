@@ -1,0 +1,6 @@
+---
+- name: Initialize kube control-plane and set pod network
+  block:
+    - command: "kubeadm init --pod-network-cidr={{ pod_network_cidr }}"
+  rescue:
+    - debug: msg="kubeadm init was already ran"
