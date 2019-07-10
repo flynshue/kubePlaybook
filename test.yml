@@ -8,11 +8,15 @@
 
 - hosts: kube-master
   gather_facts: no
+  become: yes 
+  become_method: sudo 
   roles:
-    - { role: fl-kube-master, kube_user: "{{ lookup('env', 'USER') }}", become: yes, become_method: sudo }
+    - { role: fl-kube-master, kube_user: "{{ lookup('env', 'USER') }}" }
 
-  tasks:
-    - name: lookup lines test
-      debug: msg="{{ item }} kubeadm token print test"
-      with_lines: /usr/bin/kubeadm token create --print-join-command
+- hosts: all
+  gather_facts: yes
+  become: yes
+  become_method: sudo
+  roles:
+    - { role: kube-join }
 
