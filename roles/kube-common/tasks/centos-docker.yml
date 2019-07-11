@@ -1,0 +1,32 @@
+---
+- name: Install required packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+
+- name: add docker repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: install docker latest
+  yum:
+    name: " {{ item }}"
+    state: latest
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: start docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+
+  
