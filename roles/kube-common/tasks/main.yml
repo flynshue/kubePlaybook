@@ -1,7 +1,16 @@
 ---
 # tasks file for fl-kube-common
-- import_tasks: docker.yml
-- import_tasks: kube.yml
+- import_tasks: ubuntu-docker.yml
+  when: ansible_distribution == "Ubuntu"
+
+- import_tasks: ubuntu-kube.yml
+  when: ansible_distribution == "Ubuntu"
+
+- import_tasks: centos-docker.yml
+  when: ansible_distribution == "CentOS"
+
+- import_tasks: centos-kube.yml
+  when: ansible_distribution == "CentOS"
 
 - name: configure net bridge for flannel
   sysctl:
@@ -9,3 +18,11 @@
     reload: yes
     state: present
     value: 1
+
+- name: Configure node ip
+  lineinfile:
+    path: /etc/default/kubelet
+    create: yes
+    state: present
+    line: "KUBELET_EXTRA_ARGS=--node-ip={{ansible_default_ipv4.address}}"
+  notify: "roll kubelet"

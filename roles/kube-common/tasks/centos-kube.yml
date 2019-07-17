@@ -1,0 +1,30 @@
+---
+- name: Add kubernetes repo
+  yum_repository:
+    name: kubernetes
+    description: kubernetes repo
+    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    enabled: yes 
+    gpgcheck: yes 
+    gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+    state: present
+
+- name: set selinux to permissive mode
+  selinux:
+    policy: targeted
+    state: permissive
+
+- name: install kubelet, kubeadm, kubectl
+  yum:
+    name: " {{ item }}"
+    state: latest
+  loop:
+    - kubelet
+    - kubeadm
+    - kubectl
+
+- name: start and enable kubelet
+  service:
+    name: kubelet
+    state: started
+    enabled: yes
