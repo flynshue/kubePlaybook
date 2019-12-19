@@ -1,8 +1,9 @@
 # kubePlaybook
-Ansible Playbook for kubernetes
+Ansible Playbook for standing up a basic kubernetes cluster
 
-## Inventory
-Roles rely on group names [kube_master] and [kube-node]
+## Usage
 
-## Playbook
-Requires `gather_facts: yes`
+```
+$ ansible-playbook -i inventory/hosts new-cluster.yml
+```
+
