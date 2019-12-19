@@ -1,8 +1,0 @@
-flynshue[1:3]d.mylabserver.com
-
-[kube_master]
-flynshue1d.mylabserver.com
-
-[kube_nodes]
-flynshue2d.mylabserver.com
-flynshue3d.mylabserver.com
