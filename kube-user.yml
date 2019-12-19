@@ -1,0 +1,11 @@
+---
+- hosts: kube_master
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Run kube config for current user
+      import_role:
+        name: kube-master
+        tasks_from: kube-config.yml
+      vars:
+        kube_user: "{{ lookup('env', 'USER') }}"
