@@ -22,11 +22,32 @@
     - docker-ce-cli
     - containerd.io
 
+- name: Create /etc/docker
+  file:
+    group: root
+    owner: root
+    path: /etc/docker
+    state: directory
+
+- name: Copy daemon.json over
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+
+- name: docker systemd unit directory
+  file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+
+- name: reload systemd
+  systemd:
+    daemon-reload: yes
+
 - name: start docker service
   service:
     name: docker
     state: started
     enabled: yes
 
-
-  
