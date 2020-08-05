@@ -12,11 +12,20 @@
 
 - name: Install kubeadm, kubelet, kubectl
   apt:
-    name: "{{item}}"
-    state: latest
+    name: "{{item}}={{kube_version}}"
+    state: present
     update_cache: yes
+    force: yes
   loop:
    - kubelet
    - kubeadm
    - kubectl
 
+- name: Mark and hold kube versions
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  loop:
+    - kubelet
+    - kubeadm
+    - kubectl
