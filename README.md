@@ -31,3 +31,13 @@ Or
 ```
 ansible-playbook -i inventory/hosts new-cluster.yml -e docker_version=5:19.03.12~3-0~ubuntu-bionic -e kube_version=1.17.8-00
 ```
+
+### Verify k8s cluster
+Log into the master node
+```
+flynshue@flynshue1c:~$ kubectl get nodes
+NAME                         STATUS   ROLES    AGE   VERSION
+flynshue1c.mylabserver.com   Ready    master   22m   v1.18.6
+flynshue2c.mylabserver.com   Ready    <none>   10m   v1.18.6
+flynshue3c.mylabserver.com   Ready    <none>   10m   v1.18.6
+```
