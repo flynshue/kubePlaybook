@@ -19,6 +19,7 @@
     remote_src: yes
     owner: "{{ kube_user }}"
     group: "{{ kube_user }}"
+    mode: 0600
 
 - name: copy kube config file for root
   copy:
